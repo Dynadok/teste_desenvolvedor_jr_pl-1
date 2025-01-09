@@ -8,7 +8,7 @@ export class TasksRepository {
   private tasks: Task[] = [];
   private currentId: number = 1;
 
-  createTask(text: string): Task {
+  createTask(text: string, lang: any): Task {
     const task: Task = {
       id: this.currentId++,
       text,
@@ -25,6 +25,15 @@ export class TasksRepository {
       return this.tasks[taskIndex];
     }
     return null;
+  }
+
+  deleteTask(id: number): boolean {
+    const taskIndex = this.tasks.findIndex(t => t.id === id);
+    if (taskIndex > -1) {
+      this.tasks.splice(taskIndex, 1);
+      return true;
+    }
+    return false;
   }
 
   getTaskById(id: number): Task | null {
