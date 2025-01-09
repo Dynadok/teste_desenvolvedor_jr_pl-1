@@ -12,8 +12,8 @@ class LLMService:
             base_url="https://api-inference.huggingface.co/models/Qwen/Qwen2.5-72B-Instruct/v1",
         )
 
-    def summarize_text(self, text: str) -> str:
-        prompt = f"{text}"
+    def summarize_text(self, text: str, lang: str) -> dict:
+        prompt = f"Resuma o seguinte texto em {lang}: {text}"
 
         response = self.llm.invoke(prompt)
-        return response
+        return {"summary": response}
